@@ -8,8 +8,8 @@
 import React, {Component} from 'react'; 
 
 // Import custom components
-import FirstComponent, {SecondComponent} from './components/learning-examples/FirstComponent';
-import FunctionComponent from './components/learning-examples/FunctionComponent';
+import LearningComponents from './components/learning-examples/LearningComponents';
+import Counter from './components/counter/Counter'
 
 // Import Css
 import './App.css';
@@ -30,10 +30,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        My Todo Application
-        <FirstComponent />
-        <SecondComponent />
-        <FunctionComponent />
+        <Counter />
       </div>
     );
   }
