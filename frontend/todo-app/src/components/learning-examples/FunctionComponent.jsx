@@ -1,11 +1,12 @@
 import React from 'react'; 
 
 // Function component
-export default function FunctionComponent() {
+ function FunctionComponent() {
     return (
       <div className="FunctionComponent">
         Function Component
       </div>
     );
   }
-  
+
+  export default FunctionComponent;
