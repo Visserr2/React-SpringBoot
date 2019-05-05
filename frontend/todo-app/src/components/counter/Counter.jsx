@@ -33,8 +33,10 @@ class Counter extends Component {
         )
     }
 
+    // You can automatically bind a method to the context with an arrow function.
+    // The syntax is: increment = () => {};
     increment() {
-        // Always call setState when changing state
+        // Always call setState when changing state. The changes in setState will merge with the current state
         this.setState({
           counter: this.state.counter + 1   
         });

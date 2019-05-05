@@ -26,6 +26,11 @@ import './App.css';
   * Component should be imported when creating Class-Components.
   **/
 
+  /**
+   * Class Components: These components can contain state  
+   * Functional components: For components not needing state. Lesser code and more performance.
+   **/
+
   // Class Component, need to extend component and override Render-method
 class App extends Component {
   render() {
