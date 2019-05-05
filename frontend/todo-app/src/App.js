@@ -17,6 +17,7 @@ import './App.css';
 /** 
  * React uses JSX to create attributes. This is html-like syntax thats converted by Babel to Javascript code. 
  * Every JSX-statement can only return one parent-element. This element can contain multiple child-elements. All tags must be closed in JSX.
+ * Alls the tags should be lower-case.
  * React should always be imported when using JSX.
  **/
 
