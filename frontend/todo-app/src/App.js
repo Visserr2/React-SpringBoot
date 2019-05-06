@@ -36,7 +36,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Counter />
+        <Counter increment={1}/>
+        <Counter increment={5}/>
+        <Counter increment={10}/>
       </div>
     );
   }

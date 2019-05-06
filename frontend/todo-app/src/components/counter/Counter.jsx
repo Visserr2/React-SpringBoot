@@ -33,10 +33,10 @@ class Counter extends Component {
     // Normally you want to seperate style from the JSX.
     render(){
         const style = {fontSize: "50px"};
-        
+
         return (
             <div className="counter">
-               <button onClick={this.increment}>+1</button>
+               <button onClick={this.increment}>+{this.props.increment}</button>
                <span className="count" style={style}>{this.state.counter}</span>
             </div>
         )
@@ -47,7 +47,7 @@ class Counter extends Component {
     increment() {
         // Always call setState when changing state. The changes in setState will merge with the current state
         this.setState({
-          counter: this.state.counter + 1   
+          counter: this.state.counter + this.props.increment
         });
     }
 }
