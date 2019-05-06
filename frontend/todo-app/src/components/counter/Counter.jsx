@@ -50,8 +50,9 @@ class Counter extends Component {
 
     increment(increment) {
         // Always call setState when changing state. The changes in setState will merge with the current state
-        this.setState({
-            counter: this.state.counter + increment
+        // Use ArrowFunction to access prevState
+        this.setState( (prevState) => {
+            return {counter: prevState.counter + increment}
         });
     }
 }
