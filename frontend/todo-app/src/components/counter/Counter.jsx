@@ -7,6 +7,11 @@ import './Counter.css';
     // Bind methods to context that need to change the state
     // Update the state in methods via setSate
 
+    // var is function scoped
+    // let is block scoped
+    // const is same scope as let only it cannot be changed
+
+
 // When calling a function within JSX don't use the parentheses after the method, just the reference.
 // When calling a local function within a class-component then put 'this' before the method.
 class Counter extends Component {
@@ -24,11 +29,15 @@ class Counter extends Component {
         this.increment = this.increment.bind(this);
     }
 
+    // Its possible to put css inline within the JSX. This let you define the styling in variables and set it in the component.
+    // Normally you want to seperate style from the JSX.
     render(){
+        const style = {fontSize: "50px"};
+        
         return (
             <div className="counter">
                <button onClick={this.increment}>+1</button>
-               <span className="count">{this.state.counter}</span>
+               <span className="count" style={style}>{this.state.counter}</span>
             </div>
         )
     }
