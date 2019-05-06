@@ -30,29 +30,40 @@ class Counter extends Component {
 
         // binding the method to the component
         this.increment = this.increment.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     // Its possible to put css inline within the JSX. This let you define the styling in variables and set it in the component.
     // Normally you want to seperate style from the JSX.
     render() {
-        const style = {fontSize: "50px"};
+        const style = {fontSize: "200px"};
 
         return (
             <div className="counter">
-                <CounterButton incrementMethod={this.increment} />
-                {/* In this component a parameter and reference to a method are passed to the component */}
-                <CounterButton increment={5} incrementMethod={this.increment}/>
-                <CounterButton increment={10} incrementMethod={this.increment}/>
+                <CounterButton incrementMethod={this.increment} />               
+                <CounterButton increment={5} decrement={5} incrementMethod={this.increment}/>
+                <CounterButton increment={10} decrement={10} incrementMethod={this.increment}/>
                 <span className="count" style={style}>{this.state.counter}</span>
+                <ResetButton resetMethod={this.reset}/>
             </div>
         );
     }
 
+    // You can automatically bind a method to the context with an arrow function.
+    // The syntax is: increment = () => {};
+    // increments the state (counter) of the component
     increment(increment) {
         // Always call setState when changing state. The changes in setState will merge with the current state
         // Use ArrowFunction to access prevState
         this.setState( (prevState) => {
             return {counter: prevState.counter + increment}
+        });
+    }
+
+    // set the state (counter) to zero
+    reset() {
+        this.setState({
+            counter: 0
         });
     }
 }
@@ -62,27 +73,37 @@ class CounterButton extends Component {
 
     render(){   
         return (
-            <div className="counter">
-               <button onClick={this.increment}>+{this.props.increment}</button>              
+            <div className="ButtonDiv">
+                {/* When passing a parameter to a method in an event listener then use the arrow function, else it passes the reference of method and it doesn't compile*/}
+               <button className="countButton" onClick={() => this.props.incrementMethod(this.props.increment)}>+{this.props.increment}</button>    
+               <button className="countButton" onClick={() => this.props.incrementMethod(-this.props.decrement)}>-{this.props.decrement}</button>              
             </div>
         )
     }
+}
 
-    // You can automatically bind a method to the context with an arrow function.
-    // The syntax is: increment = () => {};
-    increment = () => {
-         this.props.incrementMethod(this.props.increment);
+// The reset button for the component
+class ResetButton extends Component {
+
+    render(){   
+        return (
+            <div className="ButtonDiv">
+               <button className="resetButton" onClick={() => this.props.resetMethod()}>Reset</button>              
+            </div>
+        )
     }
 }
 
 // Setting default props for Counter Component
 CounterButton.defaultProps = {
-    increment: 1
+    increment: 1,
+    decrement: 1
 }
 
 // Setting check for property type
 CounterButton.propTypes = {
-    increment: PropTypes.number
+    increment: PropTypes.number,
+    decrement: PropTypes.number
 }
 
 export default Counter;
