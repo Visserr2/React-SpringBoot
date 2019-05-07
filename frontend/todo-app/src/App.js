@@ -10,6 +10,8 @@ import React, {Component} from 'react';
 // Import custom components
 import LearningComponents from './components/learning-examples/LearningComponents';
 import Counter from './components/counter/Counter'
+import ToDoApp from './components/todo/ToDoApp'
+
 
 // Import Css
 import './App.css';
@@ -36,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Counter />
+        <ToDoApp />
       </div>
     );
   }
