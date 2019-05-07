@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import './ToDoApp.css';
+
 class ToDoApp extends Component {
     render() {
         return (
@@ -21,35 +23,57 @@ class LoginComponent extends Component {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            isLoginFailed: false,
+            isLoginSucces: false
         }
 
-        this.usernameChange = this.usernameChange.bind(this);
-        this.passwordChange = this.passwordChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.login = this.login.bind(this);
     }
 
     render() {
         return (
             <div>
-               Username:  <input type="text" name="username" value={this.state.username} onChange={this.usernameChange} /> 
-               Password:  <input type="password" name="password" value={this.state.password} onChange={this.passwordChange}/>
-               <button>Login</button>
+               <ShowInvalidCredentials isLoginFailed={this.state.isLoginFailed} isLoginSucces={this.state.isLoginSucces} />
+               Username:  <input type="text" name="username" value={this.state.username} onChange={this.handleChange} /> 
+               Password:  <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
+               <button onClick={this.login}>Login</button>
             </div>
         )
     }
 
-    // Event handler for changing value
-    usernameChange(event) {
+    // Event handler for changing values in form
+    // Left hand side variables must be in brackets
+    handleChange(event) {
         this.setState({
-            username: event.target.value
+            [event.target.name]: event.target.value
         })
     }
 
-    passwordChange(event) {
-        this.setState({
-            password: event.target.value
-        })
+    login(){
+        if(this.state.username === 'ronald' && this.state.password === "welkom01" ){
+            this.setState({
+                isLoginFailed: false,
+                isLoginSucces: true
+            })
+        } else {
+            this.setState({
+                isLoginFailed: true,
+                isLoginSucces: false
+            })
+        }
     }
+}
+// Give login message depending on the properties
+function ShowInvalidCredentials(props){
+    if(props.isLoginFailed){
+        return <div className="error" >Invalid Credentials</div>
+    }
+    if(props.isLoginSucces){
+        return <div className="success" >Login Successfully</div>
+    }
+    return null;
 }
 
 export default ToDoApp;
