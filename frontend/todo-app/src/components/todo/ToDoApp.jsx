@@ -35,7 +35,8 @@ class LoginComponent extends Component {
     render() {
         return (
             <div>
-               <ShowInvalidCredentials isLoginFailed={this.state.isLoginFailed} isLoginSucces={this.state.isLoginSucces} />
+               {this.state.isLoginFailed && <div className="error" >Invalid Credentials</div>}
+               {this.state.isLoginSucces && <div className="success" >Login Successfully</div>}
                Username:  <input type="text" name="username" value={this.state.username} onChange={this.handleChange} /> 
                Password:  <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
                <button onClick={this.login}>Login</button>
@@ -64,16 +65,6 @@ class LoginComponent extends Component {
             })
         }
     }
-}
-// Give login message depending on the properties
-function ShowInvalidCredentials(props){
-    if(props.isLoginFailed){
-        return <div className="error" >Invalid Credentials</div>
-    }
-    if(props.isLoginSucces){
-        return <div className="success" >Login Successfully</div>
-    }
-    return null;
 }
 
 export default ToDoApp;
