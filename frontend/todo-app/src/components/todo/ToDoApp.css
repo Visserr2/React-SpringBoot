@@ -5,3 +5,7 @@
 .success {
     color: green;
 }
+
+.todo_table {
+    margin: 0 auto;
+}

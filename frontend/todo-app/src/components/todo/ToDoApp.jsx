@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 
 import './ToDoApp.css';
 
@@ -24,9 +24,15 @@ class ToDoApp extends Component {
 }
 
 // Generates the welcome page. Reading path param and show on page
+// Using Link-component instead of a-tag because Link-component only refreshes the component. A-tag refreshed whole page
 class WelcomeComponent extends Component {
     render() {
-        return <div>Welcome {this.props.match.params.name}</div>
+        return (
+            <div>
+                <h2>Welcome {this.props.match.params.name}</h2>
+                <p>You can manage your todos <Link to="/todo">here</Link>.</p>
+            </div>
+        )
     }
 }
 
@@ -37,10 +43,10 @@ class ListTodosComponent extends Component {
         super(props);
         this.state = {
             todo: [
-                {id: 1, description: 'Learn React'},
-                {id: 2, description: 'Learn CSS'},
-                {id: 3, description: 'Learn Spring Boot'},
-                {id: 4, description: 'Learn Mule'}
+                {id: 1, description: 'Learn React', done: false, targetDate: new Date()},
+                {id: 2, description: 'Learn CSS', done: false, targetDate: new Date()},
+                {id: 3, description: 'Learn Spring Boot', done: false, targetDate: new Date()},
+                {id: 4, description: 'Learn Mule', done: false, targetDate: new Date()}
             ]
         }
     }
@@ -49,11 +55,13 @@ class ListTodosComponent extends Component {
         return (
             <div>
                 <h1>List Todos</h1>
-                <table>
+                <table className="todo_table">
                     <thead>
                         <tr>
                             <th>id</th>
                             <th>Description</th>
+                            <th>Target Date</th>
+                            <th>Done</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,6 +71,8 @@ class ListTodosComponent extends Component {
                                     <tr>                          
                                         <td>{todo.id}</td>
                                         <td>{todo.description}</td>
+                                        <td>{todo.targetDate.toString()}</td>
+                                        <td>{todo.done.toString()}</td>
                                     </tr>
                             )
                         }
