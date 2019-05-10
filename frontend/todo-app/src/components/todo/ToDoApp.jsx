@@ -13,6 +13,7 @@ class ToDoApp extends Component {
                             <Route path="/" exact component={LoginComponent} />
                             <Route path="/login" component={LoginComponent} />
                             <Route path="/welcome/:name" component={WelcomeComponent} />
+                            <Route path="/todo" component={ListTodosComponent} />
                             <Route component={ErrorComponent} />
                         </Switch>
                     </>
@@ -22,10 +23,53 @@ class ToDoApp extends Component {
     }
 }
 
-// Generates the welcome page
+// Generates the welcome page. Reading path param and show on page
 class WelcomeComponent extends Component {
     render() {
         return <div>Welcome {this.props.match.params.name}</div>
+    }
+}
+
+// Generates the List todo page
+class ListTodosComponent extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            todo: [
+                {id: 1, description: 'Learn React'},
+                {id: 2, description: 'Learn CSS'},
+                {id: 3, description: 'Learn Spring Boot'},
+                {id: 4, description: 'Learn Mule'}
+            ]
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>List Todos</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            this.state.todo.map (
+                                todo => 
+                                    <tr>                          
+                                        <td>{todo.id}</td>
+                                        <td>{todo.description}</td>
+                                    </tr>
+                            )
+                        }
+                    </tbody>
+                </table>
+            </div>
+        )
     }
 }
 
@@ -74,7 +118,7 @@ class LoginComponent extends Component {
 
     login(){
         if(this.state.username === 'ronald' && this.state.password === "welkom01" ){
-            // redirect to welcome page
+            // redirect to welcome page with path param. Need to use ticks when passing variable
             this.props.history.push(`/welcome/${this.state.username}`)
         } else {
             this.setState({
