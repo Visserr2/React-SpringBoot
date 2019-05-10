@@ -12,7 +12,7 @@ class ToDoApp extends Component {
                         <Switch>
                             <Route path="/" exact component={LoginComponent} />
                             <Route path="/login" component={LoginComponent} />
-                            <Route path="/welcome" component={WelcomeComponent} />
+                            <Route path="/welcome/:name" component={WelcomeComponent} />
                             <Route component={ErrorComponent} />
                         </Switch>
                     </>
@@ -22,13 +22,14 @@ class ToDoApp extends Component {
     }
 }
 
-
+// Generates the welcome page
 class WelcomeComponent extends Component {
     render() {
-        return <div>Welcome Ronald</div>
+        return <div>Welcome {this.props.match.params.name}</div>
     }
 }
 
+// generate the error component
 function ErrorComponent() {
     return <div><h1>404</h1><p>This page does not exist.</p></div>
 }
@@ -74,7 +75,7 @@ class LoginComponent extends Component {
     login(){
         if(this.state.username === 'ronald' && this.state.password === "welkom01" ){
             // redirect to welcome page
-            this.props.history.push("/welcome")
+            this.props.history.push(`/welcome/${this.state.username}`)
         } else {
             this.setState({
                 isLoginFailed: true
