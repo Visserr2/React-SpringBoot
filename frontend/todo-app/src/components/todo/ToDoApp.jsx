@@ -15,6 +15,7 @@ class ToDoApp extends Component {
                             <Route path="/login" component={LoginComponent} />
                             <Route path="/welcome/:name" component={WelcomeComponent} />
                             <Route path="/todo" component={ListTodosComponent} />
+                            <Route path="/logout" component={LogoutComponent} />
                             <Route component={ErrorComponent} />
                         </Switch>
                         <FooterComponent />
@@ -25,6 +26,7 @@ class ToDoApp extends Component {
     }
 }
 
+// Component for creating Header
 class HeaderComponent extends Component {
     render(){
         return (
@@ -44,10 +46,14 @@ class HeaderComponent extends Component {
         )
     }
 }
+
+// Component for creating footer
 class FooterComponent extends Component {
     render(){
         return (
-            <footer><hr />Footer</footer>
+            <footer className="footer">
+                <span className="text-muted">All Rights Reserved 2019 @NDC Mediagroep</span>
+            </footer>
         )
     }
 }
@@ -156,7 +162,7 @@ class LoginComponent extends Component {
     }
 
     login(){
-        if(this.state.username === 'ronald' && this.state.password === "welkom01" ){
+        if(this.state.username === 'ronald' && this.state.password === "password" ){
             // redirect to welcome page with path param. Need to use ticks when passing variable
             this.props.history.push(`/welcome/${this.state.username}`)
         } else {
@@ -164,6 +170,20 @@ class LoginComponent extends Component {
                 isLoginFailed: true
             })
         }
+    }
+}
+
+// Component for loggin out
+class LogoutComponent extends Component {
+    render() {
+        return (
+            <div>
+                <h1>You are logged out.</h1>
+                <div className="container">
+                    Thank You for Using Our Application.
+                </div>
+            </div>
+        )
     }
 }
 
