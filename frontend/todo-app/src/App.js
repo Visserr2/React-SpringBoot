@@ -15,6 +15,7 @@ import ToDoApp from './components/todo/ToDoApp'
 
 // Import Css
 import './App.css';
+import './bootstrap.css';
 
 /** 
  * React uses JSX to create attributes. This is html-like syntax thats converted by Babel to Javascript code. 
