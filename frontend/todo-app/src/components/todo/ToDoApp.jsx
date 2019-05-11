@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import AuthenticatedRoute from './AuthenticatedRoute';
+
 import HeaderComponent from './HeaderComponent';
 import FooterComponent from './FooterComponent';
 import LoginComponent from './LoginComponent';
 import LogoutComponent from './LogoutComponent';
 import WelcomeComponent from './WelcomeComponent';
 import ListTodosComponent from './ListToDoComponent';
+import ErrorComponent from './ErrorComponent';
 
 import './ToDoApp.css';
 
@@ -29,11 +31,6 @@ class ToDoApp extends Component {
             </div>
         )
     }
-}
-
-// generate the error component
-function ErrorComponent() {
-    return <div><h1>404</h1><p>This page does not exist.</p></div>
 }
 
 export default ToDoApp;
