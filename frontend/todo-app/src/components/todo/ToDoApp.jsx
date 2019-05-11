@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import AuthenticatedRoute from './AuthenticatedRoute';
 import AuthenticationService from './AuthenticationService.js';
 
 import './ToDoApp.css';
@@ -13,9 +14,9 @@ class ToDoApp extends Component {
                             <Switch>
                                 <Route path="/" exact component={LoginComponent} />
                                 <Route path="/login" component={LoginComponent} />
-                                <Route path="/welcome" component={WelcomeComponent} />
-                                <Route path="/todo" component={ListTodosComponent} />
-                                <Route path="/logout" component={LogoutComponent} />
+                                <AuthenticatedRoute path="/welcome" component={WelcomeComponent} />
+                                <AuthenticatedRoute path="/todo" component={ListTodosComponent} />
+                                <AuthenticatedRoute path="/logout" component={LogoutComponent} />
                                 <Route component={ErrorComponent} />
                             </Switch>
                             <FooterComponent />
