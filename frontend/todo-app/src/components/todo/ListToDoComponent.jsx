@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-
 // Generates the List todo page
 class ListTodosComponent extends Component {
 
