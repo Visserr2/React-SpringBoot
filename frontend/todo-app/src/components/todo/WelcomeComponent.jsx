@@ -34,15 +34,16 @@ class WelcomeComponent extends Component {
     }
 
     retrieveWelcomeMessage(){
-        HelloWorldService.executeHelloWorldService()
+        HelloWorldService.executeHelloWorldPathParamService(sessionStorage.getItem('authenticatedUser'))
             // if promise is successful then log the response
             .then(response => this.handleResponse(response.data))
-            .catch(this.handleResponse('Service not available'));
+            // if promise unsuccesful then show error
+            .catch(error => this.handleResponse("Service not available"));
     }
 
     handleResponse(response){
         this.setState({
-            welcomeMessage: response
+            welcomeMessage: response.message
         })
     }
 }
