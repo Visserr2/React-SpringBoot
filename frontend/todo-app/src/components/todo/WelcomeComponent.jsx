@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import HelloWorldService from '../../api/todo/HelloWorldService.js'
 
 // Generates the welcome page. Reading path param and show on page
 // Using Link-component instead of a-tag because Link-component only refreshes the component. A-tag refreshed whole page
@@ -26,7 +27,9 @@ class WelcomeComponent extends Component {
     }
 
     retrieveWelcomeMessage(){
-        console.log("click");
+        HelloWorldService.executeHelloWorldService()
+            // if promise is successful then log the response
+            .then(response => console.log(response));
     }
 }
 
