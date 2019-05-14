@@ -13,6 +13,7 @@ class WelcomeComponent extends Component {
         }
         this.retrieveWelcomeMessage = this.retrieveWelcomeMessage.bind(this);
         this.handleResponse = this.handleResponse.bind(this);
+        this.handleError = this.handleError.bind(this);
     }
 
     render() {
@@ -38,12 +39,19 @@ class WelcomeComponent extends Component {
             // if promise is successful then log the response
             .then(response => this.handleResponse(response.data))
             // if promise unsuccesful then show error
-            .catch(error => this.handleResponse("Service not available"));
+            .catch(error => this.handleError(error));
     }
 
     handleResponse(response){
         this.setState({
             welcomeMessage: response.message
+        })
+    }
+
+    handleError(error){
+        console.log(error.response)
+        this.setState({
+            welcomeMessage: "Service not available"
         })
     }
 }
