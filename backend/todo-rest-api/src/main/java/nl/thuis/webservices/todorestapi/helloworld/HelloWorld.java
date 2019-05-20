@@ -1,4 +1,4 @@
-package nl.thuis.webservices.todorestapi;
+package nl.thuis.webservices.todorestapi.helloworld;
 
 public class HelloWorld {
 	

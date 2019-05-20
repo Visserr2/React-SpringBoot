@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import TodoDataService from '../../api/todo/TodoDataService'
 
 // Generates the List todo page
 class ListTodosComponent extends Component {
@@ -7,12 +8,22 @@ class ListTodosComponent extends Component {
         super(props);
         this.state = {
             todo: [
-                {id: 1, description: 'Learn React', done: false, targetDate: new Date()},
-                {id: 2, description: 'Learn CSS', done: false, targetDate: new Date()},
-                {id: 3, description: 'Learn Spring Boot', done: false, targetDate: new Date()},
-                {id: 4, description: 'Learn Mule', done: false, targetDate: new Date()}
             ]
         }
+    }
+
+    /*
+    * Do not call API in the constructor because the page will wait if response is fetched from server. If you do it via componentDidMount, it will load the page and refreshes when de callback is received
+    */
+    componentDidMount() {
+        TodoDataService.retrieveAllTodos(sessionStorage.getItem('authenticatedUser'))
+            .then(
+                response => {
+                    this.setState({
+                        todo: response.data
+                    })
+                }
+            )
     }
 
     render() {

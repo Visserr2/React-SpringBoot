@@ -1,4 +1,4 @@
-package nl.thuis.webservices.todorestapi;
+package nl.thuis.webservices.todorestapi.helloworld;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
