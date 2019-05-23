@@ -19,9 +19,29 @@ public class TodoHardCodedService {
 		todos.add(new ToDo(++idCounter, "ronald", "Learn Mule", new Date(), false));
 
 	}
+	
+	public ToDo findById(long id) {
+		for(ToDo todo: todos) {
+			if(todo.getId() == id) {
+				return todo;
+			}
+		}
+		return null;
+	}
 
 	public List<ToDo> findAll() {
 		return todos;
+	}
+	
+	public ToDo save(ToDo todo) {
+		if(todo.getId() == -1 || todo.getId() == 0) {
+			todo.setId(++idCounter);
+			todos.add(todo);
+		} else {
+			deleteById(todo.getId());
+			todos.add(todo);
+		}	
+		return todo;
 	}
 	
 	public ToDo deleteById(long id) {
@@ -34,15 +54,6 @@ public class TodoHardCodedService {
 			return todo;
 		}
 		
-		return null;
-	}
-
-	public ToDo findById(long id) {
-		for(ToDo todo: todos) {
-			if(todo.getId() == id) {
-				return todo;
-			}
-		}
 		return null;
 	}
 }
