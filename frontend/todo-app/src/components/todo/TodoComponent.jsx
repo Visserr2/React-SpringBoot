@@ -12,7 +12,8 @@ constructor(props){
         id : this.props.match.params.id,
         todo: {
             description: "",
-            targetDate: new Date(),
+            username: sessionStorage.getItem('authenticatedUser'),
+            targetDate: moment(new Date()).format("YYYY-MM-DD"),
             done: false
         }
     }
@@ -64,6 +65,9 @@ constructor(props){
     }
 
     componentDidMount() {
+        if(this.state.id === "-1"){
+            return
+        }
         this.fetchToDo();
     }
 
@@ -100,7 +104,24 @@ constructor(props){
     }
 
     onSubmit(values){
-        console.log(values)   
+        let todo = {
+            id: this.state.id,
+            username: sessionStorage.getItem('authenticatedUser'),
+            description: values.description,
+            targetDate: values.targetDate,
+            done: values.done
+        };
+        if(this.state.id === "-1") {
+            TodoDataService.createTodo(sessionStorage.getItem('authenticatedUser'), todo)
+            .then(response => {
+                this.props.history.push("/todo")
+            })
+        } else {
+            TodoDataService.updateToDo(sessionStorage.getItem('authenticatedUser'), this.state.id, todo)
+            .then(response => {
+                this.props.history.push("/todo")
+            })
+        }
     }
 }
 

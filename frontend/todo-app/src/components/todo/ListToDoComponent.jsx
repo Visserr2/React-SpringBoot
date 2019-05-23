@@ -10,11 +10,19 @@ class ListTodosComponent extends Component {
     constructor(props){
         console.log("1 - Calling constructor");
         super(props);
-        this.state = {
-            todo: [],
-            message: null
+        if(typeof this.props.location.state !== 'undefined'){
+            this.state = {
+                todos: this.props.location.state.todos,
+                message: null
+            }
+        } else {
+            this.state = {
+                todos: [],
+                message: null
+            }
         }
         this.refreshToDoList = this.refreshToDoList.bind(this);
+        this.addTodoClicked = this.addTodoClicked.bind(this);
         this.updateTodoClicked = this.updateTodoClicked.bind(this);
         this.deleteTodoClicked = this.deleteTodoClicked.bind(this);
     }
@@ -48,7 +56,7 @@ class ListTodosComponent extends Component {
                         </thead>
                         <tbody>
                             {
-                                this.state.todo.map (
+                                this.state.todos.map (
                                     todo => 
                                         <tr key={todo.id}>                          
                                             <td>{todo.description}</td>
@@ -61,6 +69,9 @@ class ListTodosComponent extends Component {
                             }
                         </tbody>
                     </table>
+                    <div className="row">
+                        <button className="btn btn-success" onClick={this.addTodoClicked}>Add Todo</button>
+                    </div>
                 </div>
             </div>
         )
@@ -71,7 +82,7 @@ class ListTodosComponent extends Component {
     */
    componentDidMount() {
     console.log("3 - Calling mount component");
-    this.refreshToDoList();
+        this.refreshToDoList();
     }
 
     // Called when changing to other component
@@ -83,8 +94,9 @@ class ListTodosComponent extends Component {
         TodoDataService.retrieveAllTodos(sessionStorage.getItem('authenticatedUser'))
         .then(
             response => {
+                console.log("GO")
                 this.setState({
-                    todo: response.data
+                    todos: response.data
                 })
             }
         )
@@ -101,6 +113,10 @@ class ListTodosComponent extends Component {
                     this.refreshToDoList();
                 }
             )
+    }
+
+    addTodoClicked(){
+        this.props.history.push(`/todo/-1`);
     }
 
     updateTodoClicked(id){
