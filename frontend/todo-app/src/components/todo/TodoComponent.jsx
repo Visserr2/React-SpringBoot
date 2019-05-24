@@ -113,14 +113,16 @@ constructor(props){
         };
         if(this.state.id === "-1") {
             TodoDataService.createTodo(sessionStorage.getItem('authenticatedUser'), todo)
-            .then(response => {
-                this.props.history.push("/todo")
-            })
+            .then(
+                response => {
+                    this.props.history.push("/todo")
+                })
         } else {
             TodoDataService.updateToDo(sessionStorage.getItem('authenticatedUser'), this.state.id, todo)
-            .then(response => {
-                this.props.history.push("/todo")
-            })
+            .then(
+                response => {
+                    this.props.history.push("/todo")
+                })
         }
     }
 }

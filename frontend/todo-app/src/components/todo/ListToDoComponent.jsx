@@ -13,12 +13,14 @@ class ListTodosComponent extends Component {
         if(typeof this.props.location.state !== 'undefined'){
             this.state = {
                 todos: this.props.location.state.todos,
-                message: null
+                message: null,
+                messageFail: null
             }
         } else {
             this.state = {
                 todos: [],
-                message: null
+                message: null,
+                messageFail: null
             }
         }
         this.refreshToDoList = this.refreshToDoList.bind(this);
@@ -42,6 +44,9 @@ class ListTodosComponent extends Component {
                 <h1>List Todos</h1>
                 {this.state.message && <div className="alert alert-success">
                     {this.state.message}
+                </div>}
+                {this.state.messageFail && <div className="alert alert-danger">
+                    {this.state.messageFail}
                 </div>}
                 <div className="container">
                     <table className="table">
@@ -94,9 +99,16 @@ class ListTodosComponent extends Component {
         TodoDataService.retrieveAllTodos(sessionStorage.getItem('authenticatedUser'))
         .then(
             response => {
-                console.log("GO")
                 this.setState({
-                    todos: response.data
+                    todos: response.data,
+                    messageFail: null
+                })
+            }
+        )
+        .catch(
+            error =>{
+                this.setState({
+                    messageFail: 'Could not fetch the todo list.'
                 })
             }
         )
@@ -111,8 +123,7 @@ class ListTodosComponent extends Component {
                         message: `Delete of todo ${id} successful!`
                     })
                     this.refreshToDoList();
-                }
-            )
+                })
     }
 
     addTodoClicked(){

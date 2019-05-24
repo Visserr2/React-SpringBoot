@@ -43,16 +43,22 @@ class LoginComponent extends Component {
     }
 
     login(){
-        if(this.state.username === 'ronald' && this.state.password === "password" ){
-            // use authentication service to save user in sessionStorage
-            AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
-            // redirect to welcome page with path param. Need to use ticks when passing variable
-            this.props.history.push("/welcome");
-        } else {
-            this.setState({
-                isLoginFailed: true
-            })
-        }
+        AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password)
+        .then(
+            () => {
+                // use authentication service to save user in sessionStorage
+                AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+                // redirect to welcome page with path param. Need to use ticks when passing variable
+                this.props.history.push("/welcome");
+            }
+        )
+        .catch(
+            () => {
+                this.setState({
+                    isLoginFailed: true
+                })
+            }
+        )
     }
 }
 

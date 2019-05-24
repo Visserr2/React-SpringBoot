@@ -49,7 +49,7 @@ class WelcomeComponent extends Component {
     }
 
     handleError(error){
-        console.log(error.response)
+        console.log(error)
         this.setState({
             welcomeMessage: "Service not available"
         })
