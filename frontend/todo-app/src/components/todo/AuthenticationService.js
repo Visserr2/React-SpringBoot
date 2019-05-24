@@ -11,8 +11,11 @@ class AuthenticationService {
         })
     }
 
-    createBasicAuthToken(username, password){
-        return "Basic " + window.btoa(username + ":" + password);
+    executeJwtAuthenticationService(username, password){
+        return Axios.post('http://localhost:8080/authenticate',{
+            username,
+            password
+        })
     }
 
     registerSuccessfulLogin(username, password){
@@ -20,9 +23,10 @@ class AuthenticationService {
         sessionStorage.setItem('authenticatedUser', username);
     };
 
-    logout(){
-        sessionStorage.removeItem('authenticatedUser');
-    }
+    registerSuccessfulLoginJwt(username, token){
+        this.setupAxiosInterceptors(this.createJWTToken(token));
+        sessionStorage.setItem('authenticatedUser', username);
+    };
 
     isUserLoggedIn(){
         let user = sessionStorage.getItem('authenticatedUser');
@@ -32,14 +36,26 @@ class AuthenticationService {
         return true;
     }
 
+    logout(){
+        sessionStorage.removeItem('authenticatedUser');
+    }
+
+    createBasicAuthToken(username, password){
+        return "Basic " + window.btoa(username + ":" + password);
+    }
+
+    createJWTToken(token){
+        return "Bearer " + token;
+    }
+
     /**
      *  Added interceptor to add authorization header when user is logged in. This method need to be called before its initialized
      **/
-    setupAxiosInterceptors(basicAuthHeader){
+    setupAxiosInterceptors(authorization){
         Axios.interceptors.request.use(
             (config) => {
                 if(this.isUserLoggedIn){
-                    config.headers.authorization = basicAuthHeader
+                    config.headers.authorization = authorization
                 }
                 return config;
             }

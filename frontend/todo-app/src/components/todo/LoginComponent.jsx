@@ -43,11 +43,11 @@ class LoginComponent extends Component {
     }
 
     login(){
-        AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password)
+        AuthenticationService.executeJwtAuthenticationService(this.state.username, this.state.password)
         .then(
-            () => {
+            (response) => {
                 // use authentication service to save user in sessionStorage
-                AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+                AuthenticationService.registerSuccessfulLoginJwt(this.state.username, response.data.token);
                 // redirect to welcome page with path param. Need to use ticks when passing variable
                 this.props.history.push("/welcome");
             }

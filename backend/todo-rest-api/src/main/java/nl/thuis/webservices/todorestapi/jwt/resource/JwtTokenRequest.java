@@ -12,6 +12,12 @@ public class JwtTokenRequest implements Serializable {
 	public JwtTokenRequest() {
 		super();
 	}
+	
+	/*
+	 * { "token":
+	 * "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbjI4bWludXRlcyIsImV4cCI6MTU1OTMwOTU3MiwiaWF0IjoxNTU4NzA0NzcyfQ.Awk2Na2BpLZbJmxxEX8EJiUXQR3Zcoh5zaMF4x7CH-C0AIdmWHeM3JTVL4T9X1kw7qPdTVjlQWVYWRfcdxpalQ"
+	 * }
+	 */
 
 	public JwtTokenRequest(String username, String password) {
 		this.setUsername(username);
