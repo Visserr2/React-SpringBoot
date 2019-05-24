@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TodoDataService from '../../api/todo/TodoDataService'
 import moment from 'moment';
+import AuthenticationService from './AuthenticationService';
 
 
 // Generates the List todo page
@@ -96,7 +97,7 @@ class ListTodosComponent extends Component {
     }
 
     refreshToDoList(){
-        TodoDataService.retrieveAllTodos(sessionStorage.getItem('authenticatedUser'))
+        TodoDataService.retrieveAllTodos(AuthenticationService.getUserName())
         .then(
             response => {
                 this.setState({
@@ -115,8 +116,7 @@ class ListTodosComponent extends Component {
     }
 
     deleteTodoClicked(id){
-        let username = sessionStorage.getItem('authenticatedUser');
-        TodoDataService.deleteTodo(username, id)
+        TodoDataService.deleteTodo(AuthenticationService.getUserName(), id)
             .then(
                 response => {
                     this.setState({

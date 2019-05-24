@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import HelloWorldService from '../../api/todo/HelloWorldService.js'
+import AuthenticationService from './AuthenticationService';
 
 // Generates the welcome page. Reading path param and show on page
 // Using Link-component instead of a-tag because Link-component only refreshes the component. A-tag refreshed whole page
@@ -35,7 +36,7 @@ class WelcomeComponent extends Component {
     }
 
     retrieveWelcomeMessage(){
-        HelloWorldService.executeHelloWorldPathParamService(sessionStorage.getItem('authenticatedUser'))
+        HelloWorldService.executeHelloWorldPathParamService(AuthenticationService.getUserName())
             // if promise is successful then log the response
             .then(response => this.handleResponse(response.data))
             // if promise unsuccesful then show error
