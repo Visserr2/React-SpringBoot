@@ -1,4 +1,4 @@
-package nl.thuis.webservices.todorestapi.todo.security;
+package nl.thuis.webservices.security;
 
 public class AuthenticationBean {
 	

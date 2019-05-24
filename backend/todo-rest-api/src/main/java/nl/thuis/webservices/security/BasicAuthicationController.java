@@ -1,4 +1,4 @@
-package nl.thuis.webservices.todorestapi.todo.security;
+package nl.thuis.webservices.security;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
