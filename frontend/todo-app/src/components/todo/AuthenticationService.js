@@ -1,4 +1,5 @@
 import Axios from "axios";
+import {API_URL} from '../../Constants'
 
 export const USER_NAME_SESSION_ATTRIBUTE = 'authenticatedUser'
 
@@ -6,7 +7,7 @@ class AuthenticationService {
 
     executeBasicAuthenticationService(username, password){
 
-        return Axios.get('http://localhost:8080/basicauth',{
+        return Axios.get(`${API_URL}/basicauth`,{
             headers: {
                 authorization: this.createBasicAuthToken(username, password)
             }
@@ -14,7 +15,7 @@ class AuthenticationService {
     }
 
     executeJwtAuthenticationService(username, password){
-        return Axios.post('http://localhost:8080/authenticate',{
+        return Axios.post(`${API_URL}/authenticate`,{
             username,
             password
         })

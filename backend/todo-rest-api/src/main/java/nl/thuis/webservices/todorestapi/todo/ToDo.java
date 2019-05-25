@@ -2,17 +2,25 @@ package nl.thuis.webservices.todorestapi.todo;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class ToDo {
 	
-	private long id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
 	private String username;
 	private String description;
 	private Date targetDate;
-	private boolean isDone;
+	private Boolean isDone;
 	
 	public ToDo() {}
 		
-	public ToDo(long id, String username, String description, Date targetDate, boolean isDone) {
+	public ToDo(Long id, String username, String description, Date targetDate, Boolean isDone) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -24,7 +32,7 @@ public class ToDo {
 	public long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getUsername() {
@@ -48,7 +56,7 @@ public class ToDo {
 	public boolean isDone() {
 		return isDone;
 	}
-	public void setDone(boolean isDone) {
+	public void setDone(Boolean isDone) {
 		this.isDone = isDone;
 	}	
 	
