@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import moment from 'moment';
 import TodoDataService from '../../api/todo/TodoDataService'
+import AuthenticationService from './AuthenticationService';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 class TodoComponent extends Component {
@@ -12,7 +13,7 @@ constructor(props){
         id : this.props.match.params.id,
         todo: {
             description: "",
-            username: sessionStorage.getItem('authenticatedUser'),
+            username: AuthenticationService.getUserName(),
             targetDate: moment(new Date()).format("YYYY-MM-DD"),
             done: false
         }
@@ -106,19 +107,19 @@ constructor(props){
     onSubmit(values){
         let todo = {
             id: this.state.id,
-            username: sessionStorage.getItem('authenticatedUser'),
+            username: AuthenticationService.getUserName(),
             description: values.description,
             targetDate: values.targetDate,
             done: values.done
         };
         if(this.state.id === "-1") {
-            TodoDataService.createTodo(sessionStorage.getItem('authenticatedUser'), todo)
+            TodoDataService.createTodo(AuthenticationService.getUserName(), todo)
             .then(
                 response => {
                     this.props.history.push("/todo")
                 })
         } else {
-            TodoDataService.updateToDo(sessionStorage.getItem('authenticatedUser'), this.state.id, todo)
+            TodoDataService.updateToDo(AuthenticationService.getUserName(), this.state.id, todo)
             .then(
                 response => {
                     this.props.history.push("/todo")

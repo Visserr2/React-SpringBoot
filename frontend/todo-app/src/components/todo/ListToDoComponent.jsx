@@ -11,19 +11,13 @@ class ListTodosComponent extends Component {
     constructor(props){
         console.log("1 - Calling constructor");
         super(props);
-        if(typeof this.props.location.state !== 'undefined'){
-            this.state = {
-                todos: this.props.location.state.todos,
-                message: null,
-                messageFail: null
-            }
-        } else {
-            this.state = {
-                todos: [],
-                message: null,
-                messageFail: null
-            }
+
+        this.state = {
+            todos: [],
+            message: null,
+            messageFail: null
         }
+        
         this.refreshToDoList = this.refreshToDoList.bind(this);
         this.addTodoClicked = this.addTodoClicked.bind(this);
         this.updateTodoClicked = this.updateTodoClicked.bind(this);
